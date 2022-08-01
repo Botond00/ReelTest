@@ -71,7 +71,7 @@ public class Reel : MonoBehaviour
         }
     }
 
-    float mOneSpinTime = 2.0f;
+    float mOneSpinTime = 1.0f;
     float mOneSpinDeltaY = -1.5f;
     float mSpinTime2T0;
     float mSpinTime2;
