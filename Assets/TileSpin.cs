@@ -41,17 +41,20 @@ public class TileSpin : MonoBehaviour
 
     }
 
-
+    float p = 0.0f;
 
     void Update() {        
-        if (Input.GetKeyUp(KeyCode.Space)) {
-        }        
+        p = p + 0.003f;
+        if (p >= 1.0f) {
+            p = 0.0f;
+        }
+        Set(mMeshUp, 1-p, false, 1);
+        Set(mMeshDown, 1-p, true, 2);
     }
         
-    void  Set(Mesh aMesh, float aPercent, string aSprite, bool aDown, int symbol)
+    void  Set(Mesh aMesh, float aPercent, bool aDown, int symbol)
     {
-        // UISpriteData sd = mAtlas.GetSprite(aSprite);
-        UISpriteData sd = UISpriteData.GetSymbolData(symbol);
+        XSpriteData sd = XSpriteData.GetSymbolData(symbol);
         
         if (sd != null)
         {
@@ -65,10 +68,10 @@ public class TileSpin : MonoBehaviour
 
             if(aDown)
             {
-                v[0] = new Vector3( 0.5f, 0, 0);
-                v[3] = new Vector3(-0.5f, aPercent, 0);
-                v[2] = new Vector3(-0.5f, 0, 0);
-                v[1] = new Vector3( 0.5f, aPercent, 0);
+                v[0] = new Vector3( 0.5f, 0, 0);  // jobb also
+                v[3] = new Vector3(-0.5f, aPercent, 0);   // bal felso
+                v[2] = new Vector3(-0.5f, 0, 0);   // bal also
+                v[1] = new Vector3( 0.5f, aPercent, 0); // jobb felso
 
                 uv[0] = new Vector2(u1, v0 + (v1-v0) * aPercent);
                 uv[3] = new Vector2(u0, v0);
