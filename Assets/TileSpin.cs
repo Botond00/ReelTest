@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TileSpin : MonoBehaviour
 {    
-    int[] Symbols = new int[] {1, 2};
+    int[] Symbols = new int[] {1, 2, 5, 4, 3, 3, 3, 6, 8, 7, 9};
     
     bool mNeedAlpha = true;
 
@@ -42,14 +42,21 @@ public class TileSpin : MonoBehaviour
     }
 
     float p = 0.0f;
+    int symbolindex = 0;
 
     void Update() {        
-        p = p + 0.003f;
+        p = p + 0.004f;
         if (p >= 1.0f) {
             p = 0.0f;
+            symbolindex--;
+            if (symbolindex < 0) {
+                symbolindex = Symbols.Length - 1;
+            }
         }
-        Set(mMeshUp, 1-p, false, 1);
-        Set(mMeshDown, 1-p, true, 2);
+        int symbol1 = Symbols[symbolindex];
+        int symbol2 = Symbols[(symbolindex + 1) % Symbols.Length];
+        Set(mMeshUp, 1-p, false, symbol1);
+        Set(mMeshDown, 1-p, true, symbol2);
     }
         
     void  Set(Mesh aMesh, float aPercent, bool aDown, int symbol)
