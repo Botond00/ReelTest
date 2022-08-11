@@ -15,7 +15,7 @@ public class Reel : MonoBehaviour
     int[] Symbols = new int[] {1, 2, 3, 4, 5, 9, 8, 7, 6, 3, 3, 3, 5, 7, 7, 7, 4};
     
     ReelState mReelState;
-    int mReelPos;
+    public int mReelPos;
 
     void Start()
     {
@@ -58,28 +58,25 @@ public class Reel : MonoBehaviour
     
     float mSpinTime;
     
-    void ShowSpinningReels() {
-        float passedtime = Time.time - mSpinTime;
-        if (passedtime < 1.0f) {
-            return;
-        }
-        mSpinTime = Time.time;
-        ShowStoppedReels();
-        mReelPos--;
-        if (mReelPos <= 0) {
-            mReelPos = Symbols.Length-1;
-        }
-    }
+    // void ShowSpinningReels() {
+    //     float passedtime = Time.time - mSpinTime;
+    //     if (passedtime < 1.0f) {
+    //         return;
+    //     }
+    //     mSpinTime = Time.time;
+    //     ShowStoppedReels();
+    //     mReelPos--;
+    //     if (mReelPos <= 0) {
+    //         mReelPos = Symbols.Length-1;
+    //     }
+    // }
 
-    float mOneSpinTime = 1.0f;
+    public float mOneSpinTime = 1.0f;
     float mOneSpinDeltaY = -1.5f;
     float mSpinTime2T0;
     float mSpinTime2;
     Vector3 ReelStartPos;
     int mSpinningReelsPhase = 0;
-
-    void StartSpinning() {
-    }
     
     void DoSpinningReels() {            
         if (mSpinningReelsPhase == 1) {
@@ -106,7 +103,7 @@ public class Reel : MonoBehaviour
             if (movePos >= 1.0f) {
                 this.transform.position = ReelStartPos;
                 mReelPos--;
-                if (mReelPos <= 0) {
+                if (mReelPos == -1) {
                     mReelPos = Symbols.Length-1;
                 }
                 ShowStoppedReels();
